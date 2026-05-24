@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste Vocacional — IFMSA Brazil UniCesumar</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F4EF;
+    --surface: #FFFFFF;
+    --ink: #1A1714;
+    --ink2: #5A554F;
+    --ink3: #9A948C;
+    --accent: #2D6A4F;
+    --accent2: #B7E4C7;
+    --border: #E0D9D0;
+    --radius: 16px;
+
+    --c-marketing: #D63384;
+    --c-intercambio: #1A6B9A;
+    --c-pesquisa: #6B6B6B;
+    --c-saudepublica: #E07B20;
+    --c-educacao: #555555;
+    --c-dsr: #C0392B;
+    --c-dhp: #2D6A4F;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: #F7F4EF;
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(45,106,79,0.25);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: rgba(183,228,199,0.12);
+  }
+  .header-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.75rem;
+  }
+  header h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  header h1 em { font-style: italic; color: var(--accent2); }
+  header p {
+    font-size: 14px;
+    color: rgba(247,244,239,0.6);
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    background: var(--surface);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--ink3);
+    margin-bottom: 6px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .progress-track {
+    height: 4px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    width: 0%;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeUp 0.4s ease both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── INTRO SCREEN ── */
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  .intro-card .icon-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .team-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .intro-card h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+  }
+  .intro-card p {
+    color: var(--ink2);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .intro-info {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .intro-info span {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: var(--ink2);
+    font-weight: 500;
+  }
+
+  /* ── QUESTION SCREEN ── */
+  .question-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 0.5rem;
+  }
+  .question-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    line-height: 1.35;
+    margin-bottom: 1.75rem;
+    color: var(--ink);
+  }
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .option-btn {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.5;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .option-btn:hover {
+    border-color: var(--accent);
+    background: #F0FAF4;
+    transform: translateX(4px);
+  }
+  .option-btn.selected {
+    border-color: var(--accent);
+    background: #EAF6EE;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .option-btn .opt-letter {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+    transition: all 0.18s;
+  }
+  .option-btn.selected .opt-letter {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  /* ── NAVIGATION ── */
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+  .btn {
+    padding: 0.75rem 1.75rem;
+    border-radius: 99px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s;
+    border: 1.5px solid transparent;
+  }
+  .btn-secondary {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--ink2);
+  }
+  .btn-secondary:hover { border-color: var(--ink3); color: var(--ink); }
+  .btn-primary {
+    background: var(--ink);
+    color: #F7F4EF;
+  }
+  .btn-primary:hover { background: #2D2924; transform: translateY(-1px); }
+  .btn-primary:disabled {
+    background: var(--border);
+    color: var(--ink3);
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ── RESULT SCREEN ── */
+  .result-hero {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .result-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 99px;
+    padding: 6px 18px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .result-hero h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .result-hero .result-subtitle {
+    font-size: 13px;
+    color: var(--ink3);
+    font-style: italic;
+  }
+
+  .result-desc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 14px;
+    color: var(--ink2);
+    line-height: 1.75;
+  }
+  .result-desc strong { color: var(--ink); font-weight: 500; }
+
+  .scores-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 1rem;
+  }
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .score-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink2);
+    width: 170px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .score-track {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .score-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 1s cubic-bezier(.4,0,.2,1) 0.3s;
+    width: 0%;
+  }
+  .score-pct {
+    font-size: 12px;
+    font-weight: 600;
+    width: 32px;
+    text-align: right;
+    color: var(--ink2);
+  }
+
+  .result-cta {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── UTILS ── */
+  .divider { height: 1px; background: var(--border); margin: 2rem 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">IFMSA Brazil · UniCesumar</div>
+  <h1>Qual time é <em>o seu?</em></h1>
+  <p>Descubra em qual comitê você vai florescer</p>
+</header>
+
+<div class="progress-bar-wrap" id="progressWrap" style="display:none">
+  <div class="progress-info">
+    <span id="progressLabel">Pergunta 1 de 14</span>
+    <span id="progressPct">0%</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<main>
+
+  <!-- INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-card">
+      <div class="icon-row">
+        <div class="team-dot" style="background:#FCE4EC">📣</div>
+        <div class="team-dot" style="background:#E3F2FD">✈️</div>
+        <div class="team-dot" style="background:#ECEFF1">🔬</div>
+        <div class="team-dot" style="background:#FFF3E0">🌿</div>
+        <div class="team-dot" style="background:#F5F5F5">📚</div>
+        <div class="team-dot" style="background:#FFEBEE">❤️</div>
+        <div class="team-dot" style="background:#E8F5E9">🕊️</div>
+        <div class="team-dot" style="background:#E8EEF5">🕊️</div>
+      </div>
+      <h2>Bem-vindo(a) à família IFMSA</h2>
+      <p>Somos 7 times, cada um com uma missão única. Este teste vai te ajudar a entender onde seu perfil, interesses e habilidades têm mais a ver — para que você entre no time certo e faça a diferença de verdade.</p>
+      <div class="intro-info">
+        <span>⏱ ~5 minutos</span>
+        <span>14 perguntas</span>
+        <span>7 times</span>
+      </div>
+      <button class="btn btn-primary" onclick="startQuiz()">Começar o teste →</button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <p class="question-label" id="qLabel">Pergunta 1</p>
+    <p class="question-text" id="qText"></p>
+    <div class="options-grid" id="optionsContainer"></div>
+    <div class="nav-row">
+      <button class="btn btn-secondary" id="btnBack" onclick="goBack()">← Voltar</button>
+      <button class="btn btn-primary" id="btnNext" onclick="goNext()" disabled>Próxima →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div class="result-hero">
+      <div class="result-badge" id="resultBadge"></div>
+      <h2 id="resultTitle"></h2>
+      <p class="result-subtitle" id="resultSubtitle"></p>
+    </div>
+    <div class="result-desc" id="resultDesc"></div>
+    <p class="scores-title">Sua afinidade com cada time</p>
+    <div id="scoresContainer"></div>
+    <div class="result-cta">
+      <button class="btn btn-secondary" onclick="restartQuiz()">↺ Refazer o teste</button>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const TEAMS = {
+  marketing:    { name: 'Marketing',                  emoji: '📣', color: '#C2185B', bg: '#FCE4EC', tag: 'Criatividade & Comunicação',   desc: 'Você tem olhar criativo, gosta de comunicar ideias com impacto e entende que a imagem de uma organização importa muito. No time de <strong>Marketing</strong> você vai produzir conteúdo, fotografar eventos, criar artes e idealizar os produtos do comitê — camisetas, casacos e tudo mais. É o time para quem quer deixar a marca da IFMSA visível.' },
+  intercambio:  { name: 'Intercâmbio',                emoji: '✈️', color: '#1565C0', bg: '#E3F2FD', tag: 'Conexões & Experiências',       desc: 'Você se emociona com histórias de pessoas de outros países, gosta de organizar, recepcionar e criar memórias. No time de <strong>Intercâmbio</strong> você vai prospectar vagas, acolher intercambistas nacionais e internacionais e garantir que cada troca seja transformadora — para eles e para você.' },
+  pesquisa:     { name: 'Pesquisa',                   emoji: '🔬', color: '#546E7A', bg: '#ECEFF1', tag: 'Ciência & Rigor',              desc: 'Você gosta de metodologia, leitura crítica e de transformar perguntas em evidências. No time de <strong>Pesquisa</strong> você vai coordenar e executar estudos científicos, com publicações em congressos da IFMSA Brasil e eventos externos. É o time ideal para quem sonha em ver o próprio nome em um artigo.' },
+  saudepublica: { name: 'Saúde Pública',              emoji: '🌿', color: '#E65100', bg: '#FFF3E0', tag: 'Comunidade & Sistema de Saúde', desc: 'Você acredita que saúde vai muito além do consultório. No time de <strong>Saúde Pública</strong> você vai desenvolver atividades sobre SUS, atenção primária e os determinantes sociais que moldam a saúde das populações. Para quem quer mudar o sistema — de dentro.' },
+  educacao:     { name: 'Educação Médica',            emoji: '📚', color: '#424242', bg: '#F5F5F5', tag: 'Ensino & Inovação',            desc: 'Você percebe o que falta no currículo antes dos professores. No time de <strong>Educação Médica</strong> você vai identificar demandas do curso, propor melhorias e criar atividades que tornam o aprendizado mais engajador — porque um médico bem formado começa na graduação.' },
+  dsr:          { name: 'Saúde Sexual & Reprodutiva', emoji: '❤️', color: '#C62828', bg: '#FFEBEE', tag: 'Direitos & Diversidade',       desc: 'Você defende com firmeza os direitos de todas as pessoas sobre os próprios corpos e identidades. No time de <strong>DSR + HIV/AIDS</strong> você vai atuar em saúde materna, saúde LGBTQIAPN+, prevenção de ISTs e tudo que envolve a saúde sexual e reprodutiva — com empatia, ciência e inclusão.' },
+  dhp:          { name: 'Direitos Humanos & Paz',     emoji: '🕊️', color: '#2E7D32', bg: '#E8F5E9', tag: 'Justiça & Vulnerabilidade',   desc: 'Você não consegue ignorar a desigualdade — e sente que precisa fazer algo a respeito. No time de <strong>Direitos Humanos e Paz</strong> você vai trabalhar com populações vulneráveis: imigrantes, pessoas em situação de rua, comunidades marginalizadas. Para quem a medicina é, acima de tudo, um ato de humanidade.' },
+};
+
+const QUESTIONS = [
+  {
+    text: 'No seu tempo livre, o que mais te atrai fazer?',
+    options: [
+      { text: 'Criar conteúdo, tirar fotos ou desenhar algo',            scores: { marketing: 3 } },
+      { text: 'Conversar com pessoas de outros países e culturas',        scores: { intercambio: 3 } },
+      { text: 'Ler artigos científicos ou explorar novas pesquisas',      scores: { pesquisa: 3 } },
+      { text: 'Participar de ações sociais ou comunitárias',              scores: { saudepublica: 2, dhp: 1 } },
+    ]
+  },
+  {
+    text: 'Qual dessas situações mais te emociona?',
+    options: [
+      { text: 'Ver uma campanha bem feita que realmente engaja pessoas',  scores: { marketing: 3 } },
+      { text: 'Um intercambista que chega nervoso e parte transformado',  scores: { intercambio: 3 } },
+      { text: 'Ter um artigo aceito em um congresso científico',          scores: { pesquisa: 3 } },
+      { text: 'Uma pessoa vulnerável sendo acolhida com dignidade',       scores: { dhp: 3 } },
+    ]
+  },
+  {
+    text: 'Quando você pensa em "saúde", o que vem primeiro à sua cabeça?',
+    options: [
+      { text: 'Prevenção, SUS, atenção primária e comunidade',            scores: { saudepublica: 3 } },
+      { text: 'Direitos sexuais, saúde reprodutiva e diversidade',        scores: { dsr: 3 } },
+      { text: 'Populações marginalizadas sem acesso a cuidados',          scores: { dhp: 3 } },
+      { text: 'Qualidade do ensino médico e formação dos estudantes',     scores: { educacao: 3 } },
+    ]
+  },
+  {
+    text: 'Qual habilidade melhor te descreve?',
+    options: [
+      { text: 'Design, escrita criativa ou produção visual',              scores: { marketing: 3 } },
+      { text: 'Organização de eventos e logística',                       scores: { intercambio: 3 } },
+      { text: 'Análise crítica, metodologia e escrita científica',        scores: { pesquisa: 3 } },
+      { text: 'Escuta ativa, empatia e comunicação com comunidades',      scores: { saudepublica: 1, dhp: 2 } },
+    ]
+  },
+  {
+    text: 'Você está num evento da IFMSA. Qual atividade você se oferece para organizar?',
+    options: [
+      { text: 'Cobertura fotográfica e stories ao vivo',                  scores: { marketing: 3 } },
+      { text: 'Recepção e integração dos participantes internacionais',   scores: { intercambio: 3 } },
+      { text: 'Apresentação de um trabalho científico do comitê',         scores: { pesquisa: 3 } },
+      { text: 'Uma roda de conversa sobre diversidade e direitos',        scores: { dsr: 2, dhp: 1 } },
+    ]
+  },
+  {
+    text: 'Qual tema você mais leria num artigo científico?',
+    options: [
+      { text: 'Determinantes sociais da saúde e epidemiologia do SUS',   scores: { saudepublica: 3 } },
+      { text: 'Inovações pedagógicas no ensino de medicina',              scores: { educacao: 3 } },
+      { text: 'Saúde de populações LGBTQIAPN+ e prevenção de ISTs',      scores: { dsr: 3 } },
+      { text: 'Saúde de populações imigrantes e em situação de rua',     scores: { dhp: 3 } },
+    ]
+  },
+  {
+    text: 'O que mais te incomoda no seu curso de medicina hoje?',
+    options: [
+      { text: 'A grade não prepara bem para a realidade do SUS',         scores: { saudepublica: 2, educacao: 1 } },
+      { text: 'Poucas oportunidades de intercâmbio e vivências globais', scores: { intercambio: 3 } },
+      { text: 'Falta de visibilidade e engajamento estudantil',          scores: { marketing: 3 } },
+      { text: 'Temas como sexualidade e diversidade são pouco abordados', scores: { dsr: 3 } },
+    ]
+  },
+  {
+    text: 'Se você pudesse criar um projeto do zero, seria sobre:',
+    options: [
+      { text: 'Uma campanha de comunicação que viralizasse',              scores: { marketing: 3 } },
+      { text: 'Um programa de mentoria para intercambistas',              scores: { intercambio: 3 } },
+      { text: 'Uma pesquisa original publicável num congresso',           scores: { pesquisa: 3 } },
+      { text: 'Uma ação de saúde numa comunidade periférica',             scores: { saudepublica: 3 } },
+    ]
+  },
+  {
+    text: 'Quando você pensa em contribuir para um mundo mais justo, sua ação mais natural é:',
+    options: [
+      { text: 'Amplificar vozes que não são ouvidas via comunicação',    scores: { marketing: 2, dhp: 1 } },
+      { text: 'Promover trocas culturais e construir pontes',            scores: { intercambio: 3 } },
+      { text: 'Gerar evidências científicas para embasar políticas',     scores: { pesquisa: 2, saudepublica: 1 } },
+      { text: 'Ir até as pessoas que mais precisam e estar presente',    scores: { dhp: 3 } },
+    ]
+  },
+  {
+    text: 'Qual perfil mais combina com você no dia a dia?',
+    options: [
+      { text: 'Criativo(a), estético(a), atento(a) à imagem das coisas', scores: { marketing: 3 } },
+      { text: 'Organizado(a), comunicativo(a), gosta de receber pessoas', scores: { intercambio: 3 } },
+      { text: 'Analítico(a), curioso(a), gosta de aprofundar temas',     scores: { pesquisa: 3 } },
+      { text: 'Empático(a), engajado(a), pensa no coletivo',             scores: { saudepublica: 1, dsr: 1, dhp: 1 } },
+    ]
+  },
+  {
+    text: 'Em um grupo de trabalho, você costuma assumir o papel de:',
+    options: [
+      { text: 'Quem faz a apresentação ficar bonita e clara',            scores: { marketing: 3 } },
+      { text: 'Quem conecta o grupo e cuida do relacionamento',          scores: { intercambio: 2, dhp: 1 } },
+      { text: 'Quem revisa os dados e a metodologia',                    scores: { pesquisa: 3 } },
+      { text: 'Quem traz o contexto social e político do tema',          scores: { saudepublica: 2, dsr: 1 } },
+    ]
+  },
+  {
+    text: 'Qual dessas conquistas te deixaria mais orgulhoso(a)?',
+    options: [
+      { text: 'Um produto ou campanha que o comitê amou',                scores: { marketing: 3 } },
+      { text: 'Receber uma mensagem de gratidão de um intercambista',    scores: { intercambio: 3 } },
+      { text: 'Ver seu nome como autor(a) em uma publicação científica', scores: { pesquisa: 3 } },
+      { text: 'Uma ação que mudou a perspectiva de alguém sobre seus direitos', scores: { dsr: 2, dhp: 2 } },
+    ]
+  },
+  {
+    text: 'Quando você vê uma notícia sobre saúde, qual mais chama sua atenção?',
+    options: [
+      { text: 'Desafios no SUS e acesso à saúde pública',               scores: { saudepublica: 3 } },
+      { text: 'Violações de direitos de populações vulneráveis',         scores: { dhp: 3 } },
+      { text: 'Pesquisas científicas com resultados surpreendentes',     scores: { pesquisa: 3 } },
+      { text: 'Saúde da mulher, LGBTQIAPN+ ou prevenção de ISTs',       scores: { dsr: 3 } },
+    ]
+  },
+  {
+    text: 'Por fim: o que mais te motiva a entrar na IFMSA?',
+    options: [
+      { text: 'Expressar criatividade e fortalecer a identidade do comitê', scores: { marketing: 3 } },
+      { text: 'Viver experiências internacionais e acolher intercambistas', scores: { intercambio: 3 } },
+      { text: 'Crescer academicamente e produzir pesquisa de qualidade', scores: { pesquisa: 3 } },
+      { text: 'Agir na sociedade e defender populações que precisam',    scores: { saudepublica: 1, dsr: 1, dhp: 1, educacao: 1 } },
+    ]
+  },
+];
+
+let current = 0;
+let answers = new Array(QUESTIONS.length).fill(null);
+let scores = {};
+
+function startQuiz() {
+  Object.keys(TEAMS).forEach(k => scores[k] = 0);
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  showScreen('quiz');
+  document.getElementById('progressWrap').style.display = 'block';
+  renderQuestion();
+}
+
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[current];
+  document.getElementById('qLabel').textContent = 'Pergunta ' + (current + 1);
+  document.getElementById('qText').textContent = q.text;
+  const letters = ['A','B','C','D'];
+  const container = document.getElementById('optionsContainer');
+  container.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn' + (answers[current] === i ? ' selected' : '');
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${opt.text}</span>`;
+    btn.onclick = () => selectOption(i);
+    container.appendChild(btn);
+  });
+  document.getElementById('btnNext').disabled = answers[current] === null;
+  document.getElementById('btnBack').style.visibility = current === 0 ? 'hidden' : 'visible';
+  updateProgress();
+}
+
+function selectOption(i) {
+  answers[current] = i;
+  document.querySelectorAll('.option-btn').forEach((b, idx) => {
+    b.classList.toggle('selected', idx === i);
+  });
+  document.getElementById('btnNext').disabled = false;
+}
+
+function goNext() {
+  if (answers[current] === null) return;
+  if (current < QUESTIONS.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    computeResult();
+  }
+}
+
+function goBack() {
+  if (current > 0) { current--; renderQuestion(); }
+}
+
+function updateProgress() {
+  const pct = Math.round((current / QUESTIONS.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = 'Pergunta ' + (current + 1) + ' de ' + QUESTIONS.length;
+  document.getElementById('progressPct').textContent = pct + '%';
+  if (current === QUESTIONS.length - 1) {
+    document.getElementById('btnNext').textContent = 'Ver resultado →';
+  } else {
+    document.getElementById('btnNext').textContent = 'Próxima →';
+  }
+}
+
+function computeResult() {
+  Object.keys(TEAMS).forEach(k => scores[k] = 0);
+  answers.forEach((ans, qi) => {
+    if (ans === null) return;
+    const s = QUESTIONS[qi].options[ans].scores;
+    Object.entries(s).forEach(([k, v]) => { scores[k] = (scores[k] || 0) + v; });
+  });
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const winner = sorted[0][0];
+  const max = sorted[0][1];
+  showResult(winner, sorted, max);
+}
+
+function showResult(winner, sorted, max) {
+  const team = TEAMS[winner];
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressLabel').textContent = 'Concluído!';
+  document.getElementById('progressPct').textContent = '100%';
+
+  const badge = document.getElementById('resultBadge');
+  badge.textContent = team.emoji + ' ' + team.tag;
+  badge.style.background = team.bg;
+  badge.style.color = team.color;
+
+  document.getElementById('resultTitle').textContent = team.name;
+  document.getElementById('resultTitle').style.color = team.color;
+  document.getElementById('resultSubtitle').textContent = 'Seu perfil tem alta afinidade com este time';
+  document.getElementById('resultDesc').innerHTML = team.desc;
+
+  const container = document.getElementById('scoresContainer');
+  container.innerHTML = '';
+  sorted.forEach(([key, val]) => {
+    const t = TEAMS[key];
+    const pct = max > 0 ? Math.round((val / max) * 100) : 0;
+    const row = document.createElement('div');
+    row.className = 'score-row';
+    row.innerHTML = `
+      <span class="score-name">${t.emoji} ${t.name}</span>
+      <div class="score-track"><div class="score-fill" data-pct="${pct}" style="background:${t.color};width:0%"></div></div>
+      <span class="score-pct">${pct}%</span>
+    `;
+    container.appendChild(row);
+  });
+
+  showScreen('result');
+  setTimeout(() => {
+    document.querySelectorAll('.score-fill').forEach(el => {
+      el.style.width = el.dataset.pct + '%';
+    });
+  }, 100);
+}
+
+function restartQuiz() {
+  document.getElementById('progressWrap').style.display = 'none';
+  showScreen('intro');
+}
+</script>
+</body>
+</html>
